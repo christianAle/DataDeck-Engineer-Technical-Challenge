@@ -43,7 +43,7 @@ namespace Api
 
         public Song(int genre)
         {
-            Genre = genre;
+            GenreId = genre;
         }
 
     }

@@ -12,17 +12,18 @@ namespace DataAccess
     {
         protected SqlDao dao;
         GenreMapper mapper;
-
+        SongMapper songmmp;
         public OperationMaster() 
         {
             mapper = new GenreMapper();
+            songmmp = new SongMapper();
             dao = SqlDao.GetInstance();
         }
 
 
         public  List<T> RetrieveAll<T>()
         {
-            var lstCustomers = new List<T>();
+            var songs = new List<T>();
 
             var lstResult = dao.GetData("");
             var dic = new Dictionary<string, object>();
@@ -31,11 +32,11 @@ namespace DataAccess
                 var objs = mapper.BuildObjects(lstResult);
                 foreach (var c in objs)
                 {
-                    lstCustomers.Add((T)Convert.ChangeType(c, typeof(T)));
+                    songs.Add((T)Convert.ChangeType(c, typeof(T)));
                 }
             }
 
-            return lstCustomers;
+            return songs;
         }
 
 
@@ -65,16 +66,16 @@ namespace DataAccess
         {
 
 
-            var sql = "SELECT * "
+            var sql = "SELECT ID,artist,song,genre,length "
                     + "FROM Songs "
-                    + "WHERE name='" + entity.SongName + "';";
+                    + "WHERE song='" + entity.SongName + "';";
 
             var lstResult = dao.GetData(sql);
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {
                 dic = lstResult[0];
-                var objs = mapper.BuildObject(dic);
+                var objs = songmmp.BuildObject(dic);
                 return (T)Convert.ChangeType(objs, typeof(T));
             }
 
@@ -93,7 +94,7 @@ namespace DataAccess
             if (lstResult.Count > 0)
             {
                 dic = lstResult[0];
-                var objs = mapper.BuildObject(dic);
+                var objs = songmmp.BuildObject(dic);
                 return (T)Convert.ChangeType(objs, typeof(T));
             }
 
@@ -101,25 +102,34 @@ namespace DataAccess
         }
 
 
-        public T RetrieveByGenre<T>(string genre)
+        public List<T> RetrieveByGenre<T>(string genre)
         {
-            var sql = "SELECT * "
+            var sql= "SELECT ID,artist,song,genre,length "
                   + "FROM Songs s "
-                  + "join Genres g on (g.Id = s.genre)"
-                  + "WHERE g.name='" + genre + "';";
+                  + " join Genres g on (g.Id = s.genre)  "
+                  + "  WHERE g.name='" + genre + "';";
 
-          
+
+            var listsongs = new List<T>();
 
             var lstResult = dao.GetData(sql);
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {
+                var objs = songmmp.BuildObjects(lstResult);
                 dic = lstResult[0];
-                var objs = mapper.BuildObject(dic);
-                return (T)Convert.ChangeType(objs, typeof(T));
-            }
+                foreach (var c in objs)
+                {
+                    listsongs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+              
 
-            return default(T);
+             
+            }
+            return listsongs;
+                
         }
+
+            
     }
 }

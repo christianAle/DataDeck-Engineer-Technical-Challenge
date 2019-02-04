@@ -10,7 +10,7 @@ using Web_Api.Models;
 
 namespace Web_Api.Controllers
 {
-    [Route("api/Song/{id}/{id}")]
+  
     public class SongController : ApiController
     {
 

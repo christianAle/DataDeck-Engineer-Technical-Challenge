@@ -57,11 +57,7 @@ namespace DataAccess
                                     {
                                         dict.Add(reader.GetName(lp), reader.GetValue(lp));
                                     }
-                                    //Genres la = new Genres();
-
-                                    //la.Id = Int32.Parse(reader["Id"].ToString());
-                                    //la.Name = reader["Name"].ToString();
-                                    //langs.Add(la);
+                                    
                                     lstResult.Add(dict);
                                 }
 
@@ -73,7 +69,7 @@ namespace DataAccess
             }
             catch (SQLiteException e)
             {
-
+               
             }
             return lstResult;
         }

@@ -54,11 +54,11 @@ namespace CoreApi
             return s;
         }
 
-        public Song RetrieveSongByGenre(string id)
+        public List<Song> RetrieveSongByGenre(string id)
         {
-            Song s = null;
+            
 
-            s = master.RetrieveByGenre<Song>(id);
+          List<Song>  s = master.RetrieveByGenre<Song>(id);
 
 
             return s;

@@ -33,7 +33,7 @@ namespace DataAccess
         }
 
 
-        public static List<Dictionary<string, object>> GetGenres(string sql)
+        public  List<Dictionary<string, object>> GetData(string sql)
         {
             
             var lstResult = new List<Dictionary<string, object>>();
@@ -42,9 +42,9 @@ namespace DataAccess
                 using (SQLiteConnection conn = new SQLiteConnection(CONNECTION_STRING))
                 {
                     conn.Open();
-                    string sql1 = "SELECT * FROM Genres ";
+                   
 
-                    using (SQLiteCommand cmd = new SQLiteCommand(sql1, conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                     {
                         using (SQLiteDataReader reader = cmd.ExecuteReader())
                         {

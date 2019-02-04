@@ -22,5 +22,12 @@ namespace Api
             Id = id;
             Name = name;
         }
+
+        public Genre( string name)
+        {
+            
+            Name = name;
+        }
+
     }
 }

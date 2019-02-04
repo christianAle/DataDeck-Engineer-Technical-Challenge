@@ -20,6 +20,7 @@ namespace Api
 
         }
 
+     
 
         public Song(int songId, string artist, string songName, int genreId, int length)
         {
@@ -28,6 +29,21 @@ namespace Api
             SongName = songName;
             GenreId = genreId;
             Length = Length;
+        }
+
+        public Song(string songName)
+        {
+            SongName = songName;
+        }
+
+        public Song(int a , string artist)
+        {
+            Artist = artist;
+        }
+
+        public Song(int genre)
+        {
+            Genre = genre;
         }
 
     }
